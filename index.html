@@ -1,0 +1,499 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>meko teko ka gift <3</title>
+<link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap" rel="stylesheet">
+
+<style>
+*{
+  margin:0;
+  padding:0;
+  box-sizing:border-box;
+  font-family:'Poppins',sans-serif;
+}
+
+body{
+  overflow:hidden;
+  background:#ffe6f0;
+}
+
+.page{
+  width:100%;
+  height:100vh;
+  position:absolute;
+  top:0;
+  left:0;
+  display:flex;
+  flex-direction:column;
+  align-items:center;
+  justify-content:center;
+  transition:opacity 0.8s ease, transform 0.8s ease;
+  padding:20px;
+}
+
+.hidden{
+  opacity:0;
+  pointer-events:none;
+  transform:translateX(60px);
+}
+
+#page1{
+  background:linear-gradient(to bottom,#ffe6f2 60%,#ff99cc 40%);
+  text-align:center;
+}
+
+#page2{
+  background:radial-gradient(circle at top left,#ffd1ec,#ffb6d9,#ff99cc);
+  overflow:hidden;
+  position:relative;
+}
+
+#page3{
+  background:linear-gradient(135deg,#ff4da6,#ff80bf,#ffcce6);
+  overflow:hidden;
+  text-align:center;
+}
+
+h1{
+  font-size:2.6rem;
+  font-weight:700;
+  color:#d63384;
+}
+
+p{
+  margin-top:20px;
+  font-size:1rem;
+  color:#6b244b;
+}
+
+button{
+  margin-top:25px;
+  padding:12px 28px;
+  font-size:1rem;
+  border:none;
+  border-radius:30px;
+  cursor:pointer;
+  background:linear-gradient(135deg,#ff66b2,#ff99cc);
+  color:white;
+  font-weight:600;
+  transition:0.3s ease;
+}
+
+button:hover{
+  transform:scale(1.08);
+  box-shadow:0 8px 20px rgba(255,102,178,0.4);
+}
+
+.button-row{
+  margin-top:30px;
+  display:flex;
+  gap:20px;
+  justify-content:center; /* center buttons */
+  position:relative;
+  z-index:2;
+}
+
+.yes-btn{
+  background:linear-gradient(135deg,#ff4d94,#ff85c1);
+}
+
+.no-btn{
+  position:relative; /* changed from fixed */
+  z-index:2;
+}
+
+
+.box-container{
+  display:flex;
+  flex-direction:column;
+  gap:25px;
+  width:90%;
+  max-width:500px;
+  position:relative;
+  z-index:2;
+}
+
+.love-box{
+  background:#fff0f6;
+  border-radius:20px;
+  padding:20px;
+  text-align:center;
+  box-shadow:0 10px 25px rgba(255,105,180,0.15);
+}
+
+.love-box h2{
+  color:#d63384;
+  margin-bottom:10px;
+}
+
+/* HEART REVEAL */
+.heart-container{
+  display:flex;
+  justify-content:center;
+  margin-top:10px;
+}
+
+.heart-letter{
+  width:40px;
+  height:40px;
+  background:#ff4d94;
+  clip-path:path("M 18 30 C -5 10, 10 -5, 18 8 C 26 -5, 41 10, 18 30 Z");
+  cursor:pointer;
+  transition:0.3s ease;
+}
+
+.heart-letter:hover{
+  transform:scale(1.2);
+}
+
+.reason-list{
+  margin-top:15px;
+  display:none;
+}
+
+.falling-photo{
+  position:absolute;
+  width:60px;
+  height:60px;
+  object-fit:cover;
+  border-radius:12px;
+  opacity:0.6;
+  z-index:0;
+  animation:photoFall linear forwards;
+}
+
+@keyframes photoFall{
+  to{
+    transform:translateY(110vh) rotate(360deg);
+    opacity:0;
+  }
+}
+
+
+.message-box{
+  background:#ffeaf5;
+  padding:25px 40px;
+  border-radius:25px;
+  box-shadow:0 15px 40px rgba(0,0,0,0.15);
+}
+
+.big-love{
+  font-size:2rem;
+  font-weight:700;
+  color:#0d1b5e;
+}
+
+.small-box{
+  margin-top:20px;
+  background:#ffffffcc;
+  padding:12px 25px;
+  border-radius:18px;
+  font-size:0.95rem;
+  color:#6b244b;
+  box-shadow:0 8px 20px rgba(0,0,0,0.1);
+  opacity:0;
+  transform:translateY(15px);
+  transition:all 0.6s ease;
+}
+
+.small-box.show{
+  opacity:1;
+  transform:translateY(0);
+}
+
+
+.falling-heart{
+  position:absolute;
+  top:-20px;
+  font-size:18px;
+  animation:fall linear forwards;
+}
+
+@keyframes fall{
+  to{
+    transform:translateY(100vh);
+    opacity:0;
+  }
+}
+
+
+@keyframes shake{
+  0%{transform:translateX(0);}
+  20%{transform:translateX(-4px);}
+  40%{transform:translateX(4px);}
+  60%{transform:translateX(-4px);}
+  80%{transform:translateX(4px);}
+  100%{transform:translateX(0);}
+}
+.shake{ animation:shake 0.3s ease; }
+
+.flash{
+  position:fixed;
+  inset:0;
+  background:white;
+  opacity:0;
+  pointer-events:none;
+  animation:flash 0.3s ease;
+}
+@keyframes flash{
+  0%{opacity:0;}
+  50%{opacity:0.4;}
+  100%{opacity:0;}
+}
+
+.spark{
+  position:absolute;
+  width:6px;
+  height:6px;
+  background:orange;
+  border-radius:50%;
+  pointer-events:none;
+  animation:fly 0.8s forwards;
+}
+
+@keyframes fly{
+  to{
+    transform:translate(var(--x),var(--y));
+    opacity:0;
+  }
+}
+
+.glitter{
+  position:fixed;
+  width:6px;
+  height:6px;
+  background:gold;
+  border-radius:50%;
+  pointer-events:none;
+  box-shadow:0 0 10px gold;
+  animation:confettiBlast 1.2s forwards;
+}
+
+@keyframes confettiBlast{
+  0%{
+    opacity:1;
+    transform:translate(0,0) scale(1);
+  }
+  70%{
+    opacity:1;
+  }
+  100%{
+    transform:translate(var(--x),var(--y)) rotate(720deg) scale(0.5);
+    opacity:0;
+  }
+}
+
+.smoke{
+  position:absolute;
+  width:40px;
+  height:40px;
+  background:radial-gradient(circle, rgba(200,200,200,0.6), transparent);
+  border-radius:50%;
+  animation:smoke 0.8s forwards;
+}
+@keyframes smoke{
+  to{
+    transform:scale(1.8);
+    opacity:0;
+  }
+}
+</style>
+</head>
+
+<body>
+
+<div id="page1" class="page">
+  <h1>Good Morning Janudiii &lt;3</h1>
+  <p>I made a gift for you, i hope you like it!!💖</p>
+  <button onclick="nextPage()">Go Ahead</button>
+</div>
+
+<div id="page2" class="page hidden">
+<div class="box-container">
+
+<div class="love-box">
+<h2>My Love for You</h2>
+<p>
+So basically my love for you is infinite and it keeps on increasing day by day and there is no power in this universe who can stop my love for you from growing, I Love You So Much I don't think anyone can love me the way you do, which makes me so happy.
+</p>
+</div>
+
+<div class="love-box">
+<h2>Letter For You</h2>
+<p id="typewriter"></p>
+</div>
+
+<div class="love-box">
+<h2>Reasons I Love You</h2>
+<div class="heart-container">
+<div class="heart-letter" onclick="showReasons()"></div>
+</div>
+<div class="reason-list" id="reasonList">
+💖 Your smile<br>
+💖 Your kindness<br>
+💖 Your strength<br>
+💖 Your love for me<br>
+💖 The way you make my life better.
+</div>
+</div>
+
+</div>
+
+<div class="button-row">
+<button class="yes-btn" onclick="goToPage3()">Yes ❤️</button>
+<button class="no-btn" id="noBtn">No 🙈</button>
+</div>
+</div>
+
+<div id="page3" class="page hidden">
+<div class="message-box">
+<div class="big-love" id="finalMessage"></div>
+</div>
+<div class="small-box" id="extraBox">
+Please use waow T-T
+</div>
+</div>
+
+<script>
+const pages=document.querySelectorAll('.page');
+let current=0;
+
+function nextPage(){
+  pages[current].classList.add('hidden');
+  current++;
+  pages[current].classList.remove('hidden');
+  startTyping();
+  startFallingPhotos();
+}
+
+const text="This is a small gift for you my love and it took me uhhhh ig more than 3 weeks? ya pta nhi 4 yaad nhi but ha it took me alot like i tried my best and litr gave it my 100% and i am still not impressed by the progress tbh but theek h like i hope it shows you that how much i love you mwahhhhhh <3";
+let i=0;
+
+function startTyping(){
+  function type(){
+    if(i<text.length){
+      document.getElementById("typewriter").innerHTML+=text.charAt(i);
+      i++;
+      setTimeout(type,30);
+    }
+  }
+  type();
+}
+
+function showReasons(){
+  document.getElementById("reasonList").style.display="block";
+}
+
+function startFallingPhotos(){
+  setInterval(()=>{
+    const img=document.createElement("img");
+    img.src="her.jpg";
+    img.classList.add("falling-photo");
+    img.style.left=Math.random()*window.innerWidth+"px";
+    img.style.animationDuration=(5+Math.random()*5)+"s";
+    document.getElementById("page2").appendChild(img);
+    setTimeout(()=>img.remove(),10000);
+  },800);
+}
+
+
+const noBtn=document.getElementById("noBtn");
+
+noBtn.onclick = () => {
+  noBtn.classList.add("shake");
+
+  setTimeout(()=>{
+   
+    const flash = document.createElement("div");
+    flash.className="flash";
+    document.body.appendChild(flash);
+    setTimeout(()=>flash.remove(),300);
+
+    const rect = noBtn.getBoundingClientRect();
+    const centerX = rect.left + rect.width/2;
+    const centerY = rect.top + rect.height/2;
+
+    
+    for(let i=0;i<20;i++){
+      const spark = document.createElement("div");
+      spark.className="spark";
+      const angle = Math.random()*2*Math.PI;
+      const distance = Math.random()*100+50;
+      spark.style.left = centerX + "px";
+      spark.style.top = centerY + "px";
+      spark.style.setProperty('--x', Math.cos(angle)*distance+"px");
+      spark.style.setProperty('--y', Math.sin(angle)*distance+"px");
+      document.body.appendChild(spark);
+      setTimeout(()=>spark.remove(),800);
+    }
+
+   
+    for(let i=0;i<40;i++){
+      const glitter = document.createElement("div");
+      glitter.className="glitter";
+      const angle = Math.random()*2*Math.PI;
+      const distance = Math.random()*200+100;
+      glitter.style.left = centerX + "px";
+      glitter.style.top = centerY + "px";
+      glitter.style.setProperty('--x', Math.cos(angle)*distance + "px");
+      glitter.style.setProperty('--y', Math.sin(angle)*distance + "px");
+      document.body.appendChild(glitter);
+      setTimeout(()=>glitter.remove(),1200);
+    }
+
+    
+    const smoke = document.createElement("div");
+    smoke.className="smoke";
+    smoke.style.left=centerX-20+"px";
+    smoke.style.top=centerY-20+"px";
+    document.body.appendChild(smoke);
+    setTimeout(()=>smoke.remove(),800);
+
+    // Remove button
+    noBtn.style.opacity="0";
+    setTimeout(()=>noBtn.remove(),200);
+
+  },300);
+};
+
+
+function goToPage3(){
+  pages[current].classList.add('hidden');
+  current=2;
+  pages[current].classList.remove('hidden');
+  startFinalTyping();
+  startHearts();
+}
+
+const finalText="Yayyyy ❤️ I love you so muchhh!";
+let j=0;
+
+function startFinalTyping(){
+  function type(){
+    if(j<finalText.length){
+      document.getElementById("finalMessage").innerHTML+=finalText.charAt(j);
+      j++;
+      setTimeout(type,50);
+    } else {
+      document.getElementById("extraBox").classList.add("show");
+    }
+  }
+  type();
+}
+
+function startHearts(){
+  setInterval(()=>{
+    const heart=document.createElement("div");
+    heart.classList.add("falling-heart");
+    heart.innerHTML="💖";
+    heart.style.left=Math.random()*window.innerWidth+"px";
+    heart.style.animationDuration=(3+Math.random()*3)+"s";
+    document.body.appendChild(heart);
+    setTimeout(()=>heart.remove(),6000);
+  },300);
+}
+</script>
+</body>
+</html>
